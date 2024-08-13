@@ -1,0 +1,244 @@
+A. Questions TCOMMERCIAL_ORG_X Data:
+
+Columns:
+COMMERCIAL_NUMBER
+MOSAAL_NUMBER
+NAME
+LICENSE_NUMBER
+LICENSE_NUMBER_ISS
+LICENSE_NUMBER_IS0
+BUSINESS_TYPE
+EXPIRY_DATE
+NATIONAL_NUMBER
+TYPE
+MOSAL_REL
+
+1. How many commercial organizations have licenses that are currently active?
+sql
+SELECT COUNT(*) AS "Number of Active Licenses"
+FROM TCOMMERCIAL_ORG_X
+WHERE EXPIRY_DATE > CURRENT_DATE;
+
+2. What is the distribution of business types among the commercial organizations?
+sql
+SELECT BUSINESS_TYPE, COUNT(*) AS "Number of Organizations"
+FROM TCOMMERCIAL_ORG_X
+GROUP BY BUSINESS_TYPE;
+
+3. Which business type has the highest number of licenses issued?
+sql
+SELECT BUSINESS_TYPE, COUNT(*) AS "Number of Licenses"
+FROM TCOMMERCIAL_ORG_X
+GROUP BY BUSINESS_TYPE
+ORDER BY "Number of Licenses" DESC
+LIMIT 1;
+
+4. What is the average license number issuance date for each type of organization?
+sql
+SELECT TYPE, AVG(LICENSE_NUMBER_ISS) AS "Average License Issue Date"
+FROM TCOMMERCIAL_ORG_X
+GROUP BY TYPE;
+
+5. How many organizations are associated with each MOSAAL number?
+sql
+SELECT MOSAAL_NUMBER, COUNT(*) AS "Number of Organizations"
+FROM TCOMMERCIAL_ORG_X
+GROUP BY MOSAAL_NUMBER;
+
+
+
+B. Questions TRESIDENCY_CERTIFI_X Data:
+Columns:
+NUMBER
+ARTICAL
+ISSUE_PLACE
+DATE_OF_ISSUE
+REASON_FOR_EXIT
+STATUS
+RES_CERT_SEQ_NUM
+PP_NATIONAL_NUMBER
+CANCELLATION_REASO
+CANCELLATION_DATE
+PUB_ORG_NUMBER
+
+1. How many residency certificates are currently active?
+sql
+SELECT COUNT(*) AS "Number of Active Certificates"
+FROM TRESIDENCY_CERTIFI_X
+WHERE STATUS = 'Active';
+2. What is the distribution of residency certificates by their issue place?
+sql
+SELECT ISSUE_PLACE, COUNT(*) AS "Number of Certificates"
+FROM TRESIDENCY_CERTIFI_X
+GROUP BY ISSUE_PLACE;
+
+3. Which reason for exit is the most common among residency certificate cancellations?
+sql
+SELECT "REASON_FOR_EXIT", COUNT(*) AS "Number of Cancellations"
+FROM TRESIDENCY_CERTIFI_X
+WHERE CANCELLATION_DATE IS NOT NULL
+GROUP BY "REASON_FOR_EXIT"
+ORDER BY "Number of Cancellations" DESC
+LIMIT 1;
+
+4. What is the average time between the issuance and cancellation of residency certificates?
+sql
+SELECT AVG(DATEDIFF(day, DATE_OF_ISSUE, CANCELLATION_DATE)) AS "Average Time to Cancellation (Days)"
+FROM TRESIDENCY_CERTIFI_X
+WHERE CANCELLATION_DATE IS NOT NULL;
+
+5. How many residency certificates were issued under each article?
+sql
+SELECT ARTICAL, COUNT(*) AS "Number of Certificates"
+FROM TRESIDENCY_CERTIFI_X
+GROUP BY ARTICAL;
+
+
+C. Questions TRESIDENT_PERIOD Data:
+Columns:
+PERIOD
+ISSUE_DATE
+EXPIRY_DATE
+PERIOD_UNIT
+RES_CERT_SEQ_NUM
+RES_CERT_NUMBER
+RES_CERT_DATE_ISS
+PP_NATIONAL_NUMBER
+PUBLIC_ORG_NUMBER
+COMM_ORG_NAT_NUM
+ISSUE_PUBLIC_ORG
+FAMILY_REL_CODE
+TEL_FOR_CIVIL
+INS_START_DATE
+
+1. How many residency periods are currently active?
+sql
+SELECT COUNT(*) AS "Number of Active Residency Periods"
+FROM TRESIDENT_PERIOD
+WHERE EXPIRY_DATE > CURRENT_DATE;
+
+2. What is the average residency period duration for each period unit (e.g., months, years)?
+sql
+SELECT PERIOD_UNIT, AVG(PERIOD) AS "Average Residency Period"
+FROM TRESIDENT_PERIOD
+GROUP BY PERIOD_UNIT;
+
+3. How many residency certificates were issued by each public organization?
+sql
+SELECT ISSUE_PUBLIC_ORG, COUNT(*) AS "Number of Residency Certificates"
+FROM TRESIDENT_PERIOD
+GROUP BY ISSUE_PUBLIC_ORG;
+
+4. What is the distribution of residency certificates by their issue date?
+sql
+SELECT ISSUE_DATE, COUNT(*) AS "Number of Residency Certificates"
+FROM TRESIDENT_PERIOD
+GROUP BY ISSUE_DATE;
+
+5. Which public organization has the highest number of residency periods issued?
+sql
+SELECT PUBLIC_ORG_NUMBER, COUNT(*) AS "Number of Residency Periods"
+FROM TRESIDENT_PERIOD
+GROUP BY PUBLIC_ORG_NUMBER
+ORDER BY "Number of Residency Periods" DESC
+LIMIT 1;
+
+D. Questions TVISA_APPLICATION
+NUMBER
+DATE
+NUMBER_OF_DEPENDEN
+SPONSOR_TYPE
+REASON
+STATUS
+TYPE
+PUBLIC_ORG_NUMBER
+COMM_ORG_NAT_NUM
+VISA_NUMBER
+PP_NATIONAL_NUMBE1
+VISA_TYPE
+FAMILY_RELATION
+SALARY
+
+1. How many visa applications are currently pending?
+sql
+Copy code
+SELECT COUNT(*) AS "Number of Pending Applications"
+FROM TVISA_APPLICATION
+WHERE STATUS = 'Pending';
+
+2. What is the distribution of visa applications by type?
+sql
+SELECT VISA_TYPE, COUNT(*) AS "Number of Applications"
+FROM TVISA_APPLICATION
+GROUP BY VISA_TYPE;
+
+3. Which public organization has processed the most visa applications?
+sql
+SELECT PUBLIC_ORG_NUMBER, COUNT(*) AS "Number of Applications"
+FROM TVISA_APPLICATION
+GROUP BY PUBLIC_ORG_NUMBER
+ORDER BY "Number of Applications" DESC
+LIMIT 1;
+
+4. What is the average salary associated with visa applications for each sponsor type?
+sql
+SELECT SPONSOR_TYPE, AVG(SALARY) AS "Average Salary"
+FROM TVISA_APPLICATION
+GROUP BY SPONSOR_TYPE;
+
+5. How many visa applications include dependents?
+sql
+SELECT COUNT(*) AS "Number of Applications with Dependents"
+FROM TVISA_APPLICATION
+WHERE NUMBER_OF_DEPENDEN > 0;
+
+
+E. Questions TVISA_X
+Columns:
+NUMBER
+ISSUE_DATE
+EXPIRY_DATE
+PURPOSE
+CANCELATION_DATE
+ISSUE_PLACE
+DURATION
+VISA_TYPE
+TIME_STAMP
+VEH_PLATE_IDENT
+TFOREIGN_VEH_PLATE
+TFOREIGN_VEH_NAT
+ENTRY_DATE
+CARRING_TYPE_CODE
+PUBLIC_ORG_NUM
+SERV_COM_ORG
+
+1. How many visas are currently active?
+sql
+SELECT COUNT(*) AS "Number of Active Visas"
+FROM TVISA_X
+WHERE EXPIRY_DATE > CURRENT_DATE AND CANCELATION_DATE IS NULL;
+
+2. What is the distribution of visas by purpose?
+sql
+SELECT PURPOSE, COUNT(*) AS "Number of Visas"
+FROM TVISA_X
+GROUP BY PURPOSE;
+
+3. Which visa type has the longest average duration?
+sql
+SELECT VISA_TYPE, AVG(DURATION) AS "Average Duration"
+FROM TVISA_X
+GROUP BY VISA_TYPE
+ORDER BY "Average Duration" DESC;
+
+4. How many visas were issued at each issue place?
+sql
+SELECT ISSUE_PLACE, COUNT(*) AS "Number of Visas Issued"
+FROM TVISA_X
+GROUP BY ISSUE_PLACE;
+
+5. How many visas were canceled after issuance?
+sql
+SELECT COUNT(*) AS "Number of Canceled Visas"
+FROM TVISA_X
+WHERE CANCELATION_DATE IS NOT NULL;
