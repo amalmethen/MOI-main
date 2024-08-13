@@ -1,0 +1,11 @@
+﻿NUMBER,DATE,NUMBER_OF_DEPENDEN,SPONSOR_TYPE,REASON,STATUS,TYPE,PUBLIC_ORG_NUMBER,COMM_ORG_NAT_NUM,VISA_NUMBER,PP_NATIONAL_NUMBE1,VISA_TYPE,FAMILY_RELATION,SALARY
+32,7/1/1993,0,حكومة               ,                                                  ,معتمدة  ,تسجيل   ,434,NULL,1,NULL,11,NULL,NULL
+33,7/1/1993,2,حكومة               ,                                                  ,معتمدة  ,تسجيل   ,434,NULL,2,NULL,11,NULL,NULL
+1,7/19/1993,2,حكومة               ,رغبة الكفيل                                       ,معتمدة  ,الغاء   ,434,NULL,NULL,NULL,11,NULL,NULL
+4,7/19/1993,2,شخص​                ,                                                  ,معتمدة  ,تسجيل   ,NULL,NULL,930000001,104266203,10,NULL,NULL
+5,7/19/1993,0,حكومة               ,                                                  ,معتمدة  ,تسجيل   ,144,NULL,NULL,NULL,1,NULL,NULL
+10,7/19/1993,0,حكومة               ,                                                  ,معتمدة  ,تسجيل   ,144,NULL,940013787,NULL,1,NULL,NULL
+11,7/19/1993,0,شركات               ,                                                  ,معتمدة  ,تسجيل   ,NULL,2,NULL,NULL,2,NULL,NULL
+12,7/19/1993,0,شخص​                ,                                                  ,معتمدة  ,تسجيل   ,NULL,NULL,930000002,104266203,3,NULL,NULL
+13,7/19/1993,0,حكومة               ,                                                  ,معتمدة  ,تسجيل   ,144,NULL,930000003,NULL,9,NULL,NULL
+14,7/19/1993,0,شركات               ,                                                  ,معتمدة  ,تسجيل   ,NULL,3,930000004,NULL,2,NULL,NULL
